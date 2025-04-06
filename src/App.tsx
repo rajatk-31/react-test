@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 import Home from "./components/Home";
 import AboutMe from "./components/AboutMe";
-import { AppProvider } from "./context/AppContext";
 import "./App.css";
 
 function App() {
   return (
-    <AppProvider>
+    <Provider store={store}>
       <Router>
         <div className="min-h-screen">
           <nav className="bg-gray-800 text-white p-4">
@@ -31,7 +32,7 @@ function App() {
           </Routes>
         </div>
       </Router>
-    </AppProvider>
+    </Provider>
   );
 }
 

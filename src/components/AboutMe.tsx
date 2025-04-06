@@ -1,15 +1,21 @@
 import React, { useState } from "react";
-import { useAppContext } from "../context/AppContext";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import {
+  updateName,
+  updateRole,
+  addSkill,
+  removeSkill,
+} from "../redux/slices/portfolioSlice";
 
 function AboutMe() {
-  const { state, updateName, updateRole, addSkill, removeSkill } =
-    useAppContext();
+  const { name, role, skills } = useAppSelector((state) => state.portfolio);
+  const dispatch = useAppDispatch();
   const [newSkill, setNewSkill] = useState("");
 
   const handleAddSkill = (e: React.FormEvent) => {
     e.preventDefault();
     if (newSkill.trim()) {
-      addSkill(newSkill.trim());
+      dispatch(addSkill(newSkill.trim()));
       setNewSkill("");
     }
   };
@@ -27,8 +33,8 @@ function AboutMe() {
                 <label className="block text-sm font-medium mb-1">Name</label>
                 <input
                   type="text"
-                  value={state.name}
-                  onChange={(e) => updateName(e.target.value)}
+                  value={name}
+                  onChange={(e) => dispatch(updateName(e.target.value))}
                   className="w-full p-2 border rounded"
                 />
               </div>
@@ -36,8 +42,8 @@ function AboutMe() {
                 <label className="block text-sm font-medium mb-1">Role</label>
                 <input
                   type="text"
-                  value={state.role}
-                  onChange={(e) => updateRole(e.target.value)}
+                  value={role}
+                  onChange={(e) => dispatch(updateRole(e.target.value))}
                   className="w-full p-2 border rounded"
                 />
               </div>
@@ -64,14 +70,14 @@ function AboutMe() {
               </form>
 
               <div className="flex flex-wrap gap-2">
-                {state.skills.map((skill, index) => (
+                {skills.map((skill, index) => (
                   <div
                     key={index}
                     className="group px-3 py-1 bg-gray-200 rounded-full text-sm flex items-center"
                   >
                     {skill}
                     <button
-                      onClick={() => removeSkill(skill)}
+                      onClick={() => dispatch(removeSkill(skill))}
                       className="ml-2 text-gray-500 hover:text-red-500"
                     >
                       ×
