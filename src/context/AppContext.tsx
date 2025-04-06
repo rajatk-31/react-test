@@ -28,9 +28,18 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 // Initial state for our app
 const initialState: AppState = {
-  name: "John Doe",
-  role: "Frontend Developer",
-  skills: ["React", "TypeScript", "Tailwind CSS"],
+  name: "Rajat Kumar",
+  role: "Full Stack Developer",
+  skills: [
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "VueJS",
+    "AWS",
+  ],
   projects: [
     {
       id: 1,
